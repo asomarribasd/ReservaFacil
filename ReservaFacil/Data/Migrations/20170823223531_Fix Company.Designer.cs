@@ -8,9 +8,10 @@ using ReservaFacil.Data;
 namespace ReservaFacil.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170823223531_Fix Company")]
+    partial class FixCompany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -175,72 +176,6 @@ namespace ReservaFacil.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("ReservaFacil.Models.Company", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CompanyName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Company");
-                });
-
-            modelBuilder.Entity("ReservaFacil.Models.Person", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ContactAddress");
-
-                    b.Property<string>("ContactNumber");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Person");
-                });
-
-            modelBuilder.Entity("ReservaFacil.Models.Professional", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("CompanyServicingId");
-
-                    b.Property<int?>("PersonalInformationid");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("CompanyServicingId");
-
-                    b.HasIndex("PersonalInformationid");
-
-                    b.ToTable("Professional");
-                });
-
-            modelBuilder.Entity("ReservaFacil.Models.Service", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("CompanyAssignedId");
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("ServiceName");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("CompanyAssignedId");
-
-                    b.ToTable("Service");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
@@ -276,24 +211,6 @@ namespace ReservaFacil.Data.Migrations
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ReservaFacil.Models.Professional", b =>
-                {
-                    b.HasOne("ReservaFacil.Models.Company", "CompanyServicing")
-                        .WithMany("Professionals")
-                        .HasForeignKey("CompanyServicingId");
-
-                    b.HasOne("ReservaFacil.Models.Person", "PersonalInformation")
-                        .WithMany()
-                        .HasForeignKey("PersonalInformationid");
-                });
-
-            modelBuilder.Entity("ReservaFacil.Models.Service", b =>
-                {
-                    b.HasOne("ReservaFacil.Models.Company", "CompanyAssigned")
-                        .WithMany("Services")
-                        .HasForeignKey("CompanyAssignedId");
                 });
         }
     }

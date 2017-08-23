@@ -10,6 +10,6 @@ namespace ReservaFacil.Models
         public int Id { get; set; }
         public string CompanyName { get; set; }
         public List<Professional>  Professionals { get; set; }
-        public List<Professional>  Services { get; set; }
+        public List<Service>  Services { get; set; }
     }
 }
