@@ -7,7 +7,8 @@ namespace ReservaFacil.Models
 {
     public class Company
     {
-        public int id { get; set; }
+        public int Id { get; set; }
+        public string CompanyName { get; set; }
         public List<Professional>  Professionals { get; set; }
         public List<Professional>  Services { get; set; }
     }
