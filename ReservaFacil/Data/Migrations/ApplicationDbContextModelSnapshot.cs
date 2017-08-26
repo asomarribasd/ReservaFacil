@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using ReservaFacil.Data;
 
 namespace ReservaFacil.Data.Migrations
 {
@@ -13,27 +15,25 @@ namespace ReservaFacil.Data.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.1.2")
+                .HasAnnotation("ProductVersion", "1.0.0-rc3")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("Id");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
                     b.Property<string>("Name")
-                        .HasMaxLength(256);
+                        .HasAnnotation("MaxLength", 256);
 
                     b.Property<string>("NormalizedName")
-                        .HasMaxLength(256);
+                        .HasAnnotation("MaxLength", 256);
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
-                        .IsUnique()
                         .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
@@ -105,6 +105,8 @@ namespace ReservaFacil.Data.Migrations
 
                     b.HasIndex("RoleId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("AspNetUserRoles");
                 });
 
@@ -125,18 +127,15 @@ namespace ReservaFacil.Data.Migrations
 
             modelBuilder.Entity("ReservaFacil.Models.ApplicationUser", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("Id");
 
                     b.Property<int>("AccessFailedCount");
-
-                    b.Property<string>("AccountType");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
                     b.Property<string>("Email")
-                        .HasMaxLength(256);
+                        .HasAnnotation("MaxLength", 256);
 
                     b.Property<bool>("EmailConfirmed");
 
@@ -145,10 +144,10 @@ namespace ReservaFacil.Data.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256);
+                        .HasAnnotation("MaxLength", 256);
 
                     b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256);
+                        .HasAnnotation("MaxLength", 256);
 
                     b.Property<string>("PasswordHash");
 
@@ -161,7 +160,7 @@ namespace ReservaFacil.Data.Migrations
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
-                        .HasMaxLength(256);
+                        .HasAnnotation("MaxLength", 256);
 
                     b.HasKey("Id");
 
@@ -173,72 +172,6 @@ namespace ReservaFacil.Data.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("ReservaFacil.Models.Company", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CompanyName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Company");
-                });
-
-            modelBuilder.Entity("ReservaFacil.Models.Person", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ContactAddress");
-
-                    b.Property<string>("ContactNumber");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Person");
-                });
-
-            modelBuilder.Entity("ReservaFacil.Models.Professional", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("CompanyServicingId");
-
-                    b.Property<int?>("PersonalInformationid");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("CompanyServicingId");
-
-                    b.HasIndex("PersonalInformationid");
-
-                    b.ToTable("Professional");
-                });
-
-            modelBuilder.Entity("ReservaFacil.Models.Service", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("CompanyAssignedId");
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("ServiceName");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("CompanyAssignedId");
-
-                    b.ToTable("Service");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
@@ -276,24 +209,6 @@ namespace ReservaFacil.Data.Migrations
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ReservaFacil.Models.Professional", b =>
-                {
-                    b.HasOne("ReservaFacil.Models.Company", "CompanyServicing")
-                        .WithMany("Professionals")
-                        .HasForeignKey("CompanyServicingId");
-
-                    b.HasOne("ReservaFacil.Models.Person", "PersonalInformation")
-                        .WithMany()
-                        .HasForeignKey("PersonalInformationid");
-                });
-
-            modelBuilder.Entity("ReservaFacil.Models.Service", b =>
-                {
-                    b.HasOne("ReservaFacil.Models.Company", "CompanyAssigned")
-                        .WithMany("Services")
-                        .HasForeignKey("CompanyAssignedId");
                 });
         }
     }
