@@ -7,7 +7,7 @@ namespace ReservaFacil.Models
 {
     public class Appointment
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public Company AssistingCompany { get; set; }
         public Client ClientScheduled { get; set; }
         public Professional ProfesionalVisited { get; set; }

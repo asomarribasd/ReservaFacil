@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ReservaFacil.Models
 {
@@ -9,7 +6,7 @@ namespace ReservaFacil.Models
     {
         public int Id { get; set; }
         public string CompanyName { get; set; }
-        public List<Professional>  Professionals { get; set; }
-        public List<Service>  Services { get; set; }
+        public IList<Professional>  Professionals { get; set; }
+        public IList<OfferService>  Services { get; set; }
     }
 }

@@ -10,5 +10,6 @@ namespace ReservaFacil.Models
     public class ApplicationUser : IdentityUser
     {
         public string AccountType { get; set; }
+
     }
 }
