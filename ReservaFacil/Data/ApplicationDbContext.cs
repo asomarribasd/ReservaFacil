@@ -22,5 +22,9 @@ namespace ReservaFacil.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<ReservaFacil.Models.Professional> Professional { get; set; }
+
+        public DbSet<ReservaFacil.Models.Client> Client { get; set; }
     }
 }
