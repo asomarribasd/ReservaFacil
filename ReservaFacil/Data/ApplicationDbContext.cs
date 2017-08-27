@@ -26,5 +26,7 @@ namespace ReservaFacil.Data
         public DbSet<ReservaFacil.Models.Professional> Professional { get; set; }
 
         public DbSet<ReservaFacil.Models.Client> Client { get; set; }
+
+        public DbSet<ReservaFacil.Models.OfferedService> OfferedService { get; set; }
     }
 }
